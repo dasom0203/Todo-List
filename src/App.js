@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import customAxios from './customAxios';
+import TodoBoard from './components/todoBoard';
+//import customAxios from './customAxios';
 
 // Todo List 만들기
 // ▶ 중요 여부 체크 + 인풋창 + 추가 버튼
@@ -14,15 +15,33 @@ function App() {
   
   // state 선언
   // 초기 값은 알 수 없으므로 빈 값
-  
+  const [inputValue, setInputValue] = useState('')
+
+  // 아이템을 모아두는 배열
+  const [todoList, setTodoList] = useState([])
+
+  // 아이템 추가 버튼을 누르면 호출되는 함수
+  const addItem = () => {
+    console.log("im hererere!!!, inputValue")
+
+    // 아이템 추가
+    // 기존 아이템은 유지하고 새로 추가
+    setTodoList([...todoList,inputValue])
+  }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        이 기기의 IP주소는 {ip} 오잉? 입니다.
-      </header>
-    </div>
+    <main>
+      <h1>TODO LIST</h1>
+      <h3>다솜님, 안녕하세요!</h3>
+
+      <input value={inputValue}type="text" onChange={(event)=>setInputValue(event.target.value)}></input>
+      <button onClick={addItem}>+</button>
+
+      <TodoBoard todoList={todoList}></TodoBoard>
+    </main>
   );
+
+ 
 }
 
 export default App;
